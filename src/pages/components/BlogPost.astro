@@ -2,6 +2,9 @@
 import { Formatter } from "@utils/formater"
 const {frontmatter,url,...rest } = Astro.props;
 const {title,date,image,description} = frontmatter;
+
+
+
 ---
 <div class="lg:flex">
     <img class="object-cover w-full h-56 rounded-lg lg:w-64" src={image} alt={title}>
