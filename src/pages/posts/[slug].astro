@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BlogLayout from "src/layouts/BlogLayout.astro";
+
+export const getStaticPaths = (async() => {    
+    const blogCollections = await getCollection("blog");
+    return blogCollections.map((post) => ({
+        params: { slug: post.slug },
+        props: {post},    
+    }));    
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props
+const frontmatter = post.data;
+const  {Content, headings} = await post.render()
+
+---
+
+<BlogLayout title={frontmatter.title}>
+    <h1 class="text-xs text-gray-500 mb-0">{frontmatter.title}</h1>
+    <h4 class="text-md text-gray-500 mb-0">{frontmatter.author}</h4>
+
+    <Image quality="low" transition:name={`${post.slug}-image`} class="object-cover w-full h-[250px] my-5 rounded-md" alt={frontmatter.title} src={frontmatter.image} width={600} height={220}></Image>
+
+    {
+        headings.map((heading,index) => (
+            <li>
+           <a href={`#${heading.slug}`}>{index+1} -{heading.text}</a>
+            </li>            
+        ))
+    }    
+        <Content />    
+        <div class="my-5 flex  flex-col justify-center  items-center fixed bottom-0  border rounded py-2 px-2 space-y-1 j right-5">                
+            <a href="#btn-back" class="text-white   hover:text-blue-500 hover:no-underline">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 ">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg></a>    
+        </div>
+    
+    
+</BlogLayout>

@@ -2,9 +2,10 @@
 import { ViewTransitions } from 'astro:transitions';
 
 import "../styles/blog.css";
-const { title,...rest } = Astro.props;
-const frontMatter = rest.frontmatter;
-console.log(frontMatter);
+import { siteConfig } from 'src/config/site-config';
+const { title } = Astro.props;
+//const frontMatter = rest.frontmatter;
+//console.log(frontMatter);
 ---
 
 <html lang="en">
@@ -13,11 +14,11 @@ console.log(frontMatter);
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{title ?? siteConfig.title}</title>
         <ViewTransitions />
 	</head>
 	<body class="bg-gray-900">
-        <a href="/" class="text-white">Regresar</a>
+        <a href="/" id="btn-back" class="text-white">Regresar</a>
 <main class="mb-10 max-w-3xl m-auto px-2 py-7">
 <slot/>
 </main>
