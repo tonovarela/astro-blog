@@ -1,23 +1,30 @@
 ---
-import { Image } from 'astro:assets';
+ import { Image } from 'astro:assets';
+import type { InferEntrySchema } from 'astro:content';
 
-const {autor} = Astro.props;
-const {avatar,name,twitter,linkedIn,github,bio}= autor.data;
+interface Props {
+  autor: any;
+  id: string;
+}
+
+const {autor,id} = Astro.props;
+console.log
+
 ---
 <div class="max-w-lg    border  text-white rounded-lg shadow-md p-5">             
-    <Image class="w-32 h-32 rounded-full mx-auto" src={avatar} alt="Profile picture" />
-    <h2 class="text-center text-2xl font-semibold mt-3">{name}</h2>            
+    <Image class="w-32 h-32 rounded-full mx-auto" src={autor.avatar} alt="Profile picture" />
+    <h2 class="text-center text-2xl font-semibold mt-3">{autor.name}</h2>            
     <div class="flex justify-center mt-5">
-      <a href={twitter} class="text-blue-500 hover:text-blue-700 mx-3">Twitter</a>
-<a href={linkedIn} class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
-<a href={github} class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
+      <a href={autor.twitter} class="text-blue-500 hover:text-blue-700 mx-3">Twitter</a>
+<a href={autor.linkedIn} class="text-blue-500 hover:text-blue-700 mx-3">LinkedIn</a>
+<a href={autor.github} class="text-blue-500 hover:text-blue-700 mx-3">GitHub</a>
     </div>                      
 <div class="mt-5">
 <h3 class="text-xl font-semibold">Bio</h3>
-<p class=" mt-2">{bio}</p>
+<p class=" mt-2">{autor.bio}</p>
 </div>
 <div class="text-center mt-5">
-                  <a href={`/blog/${autor.id}`} class="text-blue-500 hover:text-blue-700 mx-3">View Posts</a>              
+                  <a href={`/blog/${id}`} class="text-blue-500 hover:text-blue-700 mx-3">View Posts</a>              
 </div>  
   </div>
 
