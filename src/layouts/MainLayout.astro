@@ -1,9 +1,5 @@
-
 ---
 import { ViewTransitions } from 'astro:transitions';
-interface Props {
-  title: string;
-}
 const { title } = Astro.props;
 ---
 
@@ -18,7 +14,7 @@ const { title } = Astro.props;
 		<ViewTransitions />
 	</head>
 	<body class="bg-gray-900">
-<main class="mb-10 max-w-5xl m-auto p-2">
+  <main class="mb-10 max-w-5xl m-auto py-2  px-5">
 <slot/>
 </main>
 	</body>

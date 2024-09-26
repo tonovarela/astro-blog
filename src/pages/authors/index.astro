@@ -1,0 +1,24 @@
+---
+
+import { getCollection } from "astro:content";
+import { siteConfig } from "src/config/site-config";
+import MainLayout from "src/layouts/MainLayout.astro";
+import Author from "@components/Author.astro";
+const autors = await  getCollection('author');
+---
+<MainLayout title="Autores">
+    <section class="container px-6 py-10 mx-auto">
+        <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">{siteConfig.title}</h1>        
+    </section>        
+    <div class="grid grid-cols-2  gap-4">
+        { autors.map((autor:any)=>        
+      
+        <Author data={autor.data} id={autor.id} />      
+        )
+      }        
+    </div>
+        
+    
+
+    
+</MainLayout>
