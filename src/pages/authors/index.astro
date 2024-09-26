@@ -1,9 +1,8 @@
 ---
-
 import { getCollection } from "astro:content";
 import { siteConfig } from "src/config/site-config";
 import MainLayout from "src/layouts/MainLayout.astro";
-import Author from "@components/Author.astro";
+import AuthorCard from "@components/AuthorCard.astro";
 const autors = await  getCollection('author');
 ---
 <MainLayout title="Autores">
@@ -11,10 +10,7 @@ const autors = await  getCollection('author');
         <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">{siteConfig.title}</h1>        
     </section>        
     <div class="grid grid-cols-2  gap-4">
-        { autors.map((autor:any)=>        
-      
-        <Author data={autor.data} id={autor.id} />      
-        )
+        { autors.map((autor)=><AuthorCard autor={autor} />)
       }        
     </div>
         
