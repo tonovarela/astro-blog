@@ -1,5 +1,5 @@
 ---
-//  import { Image } from 'astro:assets';
+  import { Image } from 'astro:assets';
 
 
 interface Props {
@@ -7,11 +7,11 @@ interface Props {
   id: string;
 }
 
-// const {autor,id} = Astro.props;
+ const {autor,id} = Astro.props;
 
 
 ---
-<!-- <div class="max-w-lg    border  text-white rounded-lg shadow-md p-5">             
+<div class="max-w-lg    border  text-white rounded-lg shadow-md p-5">             
     <Image class="w-32 h-32 rounded-full mx-auto" src={autor.avatar} alt="Profile picture" />
     <h2 class="text-center text-2xl font-semibold mt-3">{autor.name}</h2>            
     <div class="flex justify-center mt-5">
@@ -26,7 +26,7 @@ interface Props {
 <div class="text-center mt-5">
                   <a href={`/blog/${id}`} class="text-blue-500 hover:text-blue-700 mx-3">View Posts</a>              
 </div>  
-  </div> -->
+  </div>
 
 
 
