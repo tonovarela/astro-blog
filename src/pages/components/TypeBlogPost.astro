@@ -1,31 +1,37 @@
 ---
-import { Formatter } from "@utils/formater"
-import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 
- interface Props {
-    post:CollectionEntry<'blog'>;
- }
+// import { Formatter } from '@utils/formater';
+// import { Image } from 'astro:assets';
+// import type { CollectionEntry } from 'astro:content';
 
- const { post }= Astro.props ;
-//  const url = `/posts/${post.slug}`;
- 
- const fronmatter = post.data;
- const {image,title,description,date} = fronmatter
+// interface Props { post: CollectionEntry<'blog'>}
 
+// const { post } = Astro.props;
+// const frontmatter = post.data;
 ---
-<div class="lg:flex">
-    <Image class="object-cover w-full h-56 rounded-lg lg:w-64" 
-    width={500} height={500} quality="low"
+
+<!-- <div class="lg:flex">
+  <Image
+    class="object-cover w-full h-56 rounded-lg lg:w-64"
+    src={frontmatter.image}
+    alt={frontmatter.title}
+    width={500}
+    width={500}
+    quality="low"
+    loading="lazy"
     transition:name={`${post.slug}-image`}
-    src={image} alt={title} />
-    <div class="flex flex-col justify-between py-6 lg:mx-6">
-        <a href="#" class="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-            {title}
-        </a>        
-        <p class="text-white">{description}</p>
-        <span class="text-sm text-gray-500 dark:text-gray-300"> {Formatter.format(date)}</span>
-    </div>
-</div>
+  />
 
+  <div class="flex flex-col justify-between py-6 lg:mx-6">
+    <a
+      href={`/posts/${post.slug}`}
+      class="text-xl font-semibold hover:underline text-white"
+    >
+      {frontmatter.description}
+    </a>
 
+    <span class="text-sm text-gray-300"
+      >{Formatter.format(frontmatter.date)}</span
+    >
+  </div>
+</div> -->

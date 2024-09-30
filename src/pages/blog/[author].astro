@@ -1,41 +1,41 @@
 ---
-import type { GetStaticPaths } from "astro";
-import { getCollection, type CollectionEntry, type InferEntrySchema } from "astro:content";
-
+import type { GetStaticPaths } from 'astro';
 import { siteConfig } from 'src/config/site-config';
 import MainLayout from '../../layouts/MainLayout.astro';
-import TypeBlogPost from '../components/TypeBlogPost.astro';
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import TypeBlogPost from '@components/TypeBlogPost.astro';
 
 
-interface Props {
-  author:InferEntrySchema<"author">
-  blogPosts: CollectionEntry<'blog'>[];
-}
+export const getStaticPaths = (async () => {
+  //  const authors = await getCollection('author')
+  //  const posts =  await getCollection('blog')
+  const [authors, posts] = await Promise.all([
+    getCollection('author'),
+    getCollection('blog'),
+  ]);
 
-export const getStaticPaths: GetStaticPaths = async () => { 
- const [authors,posts] = await  Promise.all([ getCollection("author"), getCollection("blog")]);
-  return authors.map(({id,data}) => ({
-    params: { author: id },    
+  return authors.map((author) => ({
+    params: { author: author.id },
     props: {
-            blogPosts:posts.filter(p=>p.data.author.id==id),
-            author:data
-        },
+      blogPosts: posts.filter((post) => post.data.author.id === author.id),
+      author: author.data,
+    },
   }));
-};
-const { blogPosts,author } = Astro.props;
+}) satisfies GetStaticPaths;
 
+const { blogPosts, author } = Astro.props;
 ---
 
-<MainLayout title={author.name}>
+<MainLayout>
   <section class="bg-gray-900">
     <div class="container px-6 py-10 mx-auto">
       <h1 class="text-3xl font-semibold capitalize lg:text-4xl text-white">
         {siteConfig.title}
       </h1>
-   <a href="/">Regresar</a>
+      <a href="/">Regresar</a>
+
       <div class="text-md text-gray-400 mb-0 flex flex-row mt-2">
-    
         <Image
           class="rounded-full"
           src={author.avatar}
